@@ -8,6 +8,8 @@ import twitter4j.HashtagEntity;
 
 public class Tweet implements java.io.Serializable{
 	private static final long serialVersionUID = -2599376376240068235L;
+	
+	private Long id;
 	private Date date;
 	private String name;
 	private String text;
@@ -16,7 +18,9 @@ public class Tweet implements java.io.Serializable{
 	private String country;
 	
 	
-	public Tweet(Date date, String name, String text,int retweets, String country) {
+	
+	public Tweet( Long id, Date date, String name, String text,int retweets, String country) {
+		this.id = id;
 		this.date = date;
 		this.text = text;
 		this.name = name;
@@ -33,6 +37,14 @@ public class Tweet implements java.io.Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getCountry() {

@@ -49,6 +49,7 @@ public class KafkaStream {
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 		twitterStream.setOAuthConsumer(consumerKey, consumerSecret);
 		twitterStream.setOAuthAccessToken(new AccessToken(token, secret));
+		
 		StatusListener listener = new StatusListener() {
 			private int count = 0;
 
@@ -71,10 +72,10 @@ public class KafkaStream {
 				
 				if(status.getPlace()!=null){
 				
-					currentTweet = new Tweet(status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), status.getPlace().getCountry() );
+					currentTweet = new Tweet(status.getId(),status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), status.getPlace().getCountry() );
 				
 				}else{
-					currentTweet = new Tweet(status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), "Sin Localización" );
+					currentTweet = new Tweet(status.getId(),status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), "Sin Localización" );
 
 				}
 				
