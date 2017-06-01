@@ -13,24 +13,34 @@ public class Tweet implements java.io.Serializable{
 	private Date date;
 	private String name;
 	private String text;
-	//private HashtagEntity[] hashtagEntities;
 	private int retweets;
 	private String country;
+	private String hashtags;
 	
 	
 	
-	public Tweet( Long id, Date date, String name, String text,int retweets, String country) {
+	
+	public Tweet( Long id, Date date, String name, String text,int retweets, String country, String hashtags) {
 		this.id = id;
 		this.date = date;
 		this.text = text;
 		this.name = name;
-		//this.hashtagEntities = hashtagEntities;
 		this.retweets = retweets;
 		this.country = country;
+		this.hashtags = hashtags;
+	
 
 
 	}
 	
+	public String getHashtags() {
+		return hashtags;
+	}
+
+	public void setHashtags(String hashtags) {
+		this.hashtags = hashtags;
+	}
+
 	public String getName() {
 		return name;
 	}

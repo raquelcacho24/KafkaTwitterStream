@@ -7,6 +7,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import twitter4j.FilterQuery;
+import twitter4j.HashtagEntity;
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -70,20 +71,31 @@ public class KafkaStream {
 				
 				Tweet currentTweet;
 				
+				HashtagEntity[] hashtags = status.getHashtagEntities();
+				String myhashtags= " ";
+				
+				if(hashtags != null){
+					for(HashtagEntity hashtag : hashtags){
+						
+							myhashtags = myhashtags + " " + hashtag.getText();
+						
+					}
+				}
+				
 				if(status.getPlace()!=null){
 				
-					currentTweet = new Tweet(status.getId(),status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), status.getPlace().getCountry() );
+					currentTweet = new Tweet(status.getId(),status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), status.getPlace().getCountry(), myhashtags );
 				
 				}else{
-					currentTweet = new Tweet(status.getId(),status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), "Sin Localización" );
+					currentTweet = new Tweet(status.getId(),status.getCreatedAt(),status.getUser().getName(), status.getText(),status.getRetweetCount(), "Sin Localización", myhashtags );
 
 				}
 				
 				System.out.println(currentTweet.getDate());
-				System.out.println(currentTweet.getName());
-				System.out.println(currentTweet.getText());
-				//System.out.println(currentTweet.getHashtag());
-				System.out.println(currentTweet.getRetweets());
+				//System.out.println(currentTweet.getName());
+				//System.out.println(currentTweet.getText());
+				System.out.println(currentTweet.getHashtags());
+				//System.out.println(currentTweet.getRetweets());
 				ProducerRecord<String, Tweet> record = new ProducerRecord<String, Tweet>(topic, Integer.toString(count), currentTweet);
 				kafkaProducer.send(record);
 				count++;
