@@ -19,10 +19,7 @@ import twitter4j.auth.AccessToken;
 public class KafkaStream {
 	
 	public static void main(String[] args) {
-		/*if (args.length < 5) {
-			System.err.println("Usage: KafkaStream <kafka brokers> <topic> <Consumer Key> <Consumer Secret> <Access Token> <Access Token Secret>");
-		    System.exit(1);
-		}*/
+		
 		
 		final String topic = "twitterdata";
 		
@@ -52,6 +49,7 @@ public class KafkaStream {
 		twitterStream.setOAuthAccessToken(new AccessToken(token, secret));
 		
 		StatusListener listener = new StatusListener() {
+			
 			private int count = 0;
 
 			public void onException(Exception e) {
@@ -91,11 +89,12 @@ public class KafkaStream {
 
 				}
 				
-				System.out.println(currentTweet.getDate());
+				//System.out.println(currentTweet.getDate());
 				//System.out.println(currentTweet.getName());
 				//System.out.println(currentTweet.getText());
-				System.out.println(currentTweet.getHashtags());
+				//System.out.println(currentTweet.getHashtags());
 				//System.out.println(currentTweet.getRetweets());
+				
 				ProducerRecord<String, Tweet> record = new ProducerRecord<String, Tweet>(topic, Integer.toString(count), currentTweet);
 				kafkaProducer.send(record);
 				count++;

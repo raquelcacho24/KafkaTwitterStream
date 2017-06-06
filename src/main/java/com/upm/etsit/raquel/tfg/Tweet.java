@@ -7,7 +7,6 @@ import java.util.Date;
 import twitter4j.HashtagEntity;
 
 public class Tweet implements java.io.Serializable{
-	private static final long serialVersionUID = -2599376376240068235L;
 	
 	private Long id;
 	private Date date;
@@ -17,7 +16,7 @@ public class Tweet implements java.io.Serializable{
 	private String country;
 	private String hashtags;
 	
-	
+	private static final long serialVersionUID = -2599376376240068235L;
 	
 	
 	public Tweet( Long id, Date date, String name, String text,int retweets, String country, String hashtags) {
